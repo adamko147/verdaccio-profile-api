@@ -1,0 +1,32 @@
+{
+  "name": "verdaccio-profile-api",
+  "version": "0.0.1",
+  "description": "Verdaccio Profile API plugin",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node_modules/jest/bin/jest test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahoracek/verdaccio-profile-api.git"
+  },
+  "keywords": [
+    "npm",
+    "registry",
+    "verdaccio",
+    "profile",
+    "api"
+  ],
+  "author": "Adam Horacek <adam.horacek@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahoracek/verdaccio-profile-api/issues"
+  },
+  "homepage": "https://github.com/ahoracek/verdaccio-profile-api",
+  "dependencies": {
+    "@verdaccio/file-locking": "0.0.7",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "unix-crypt-td-js": "^1.0.0"
+  }
+}
