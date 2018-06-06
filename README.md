@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ahoracek/verdaccio-profile-api.svg?branch=master)](https://travis-ci.org/ahoracek/verdaccio-profile-api)
+
 # Verdaccio 2.x module for npm profile commands
 
 Basic Verdaccio 2.x module for handling npm profile commands and changing password with ```verdaccio-htpasswd``` authentication plugin
