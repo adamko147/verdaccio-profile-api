@@ -32,18 +32,15 @@ function middlewares(config, stuff, app, auth, storage) {
             return next({message: "You must be authenticated"});
         }
         else {
-            res.status(200)
-            return next({
-                tfa: null,
-                name: req.remote_user.name  
-            });
+            res.status(200);
+            next({name: req.remote_user.name});
         }
     });
 
     router.post('/', function(req, res, next) {
         if (!htpasswd) {
             res.status(404);
-            return next();
+            return next({message: "HTPasswd not used"});
         }
         if (req.remote_user === undefined || req.remote_user.name === undefined) {
             res.status(403);
@@ -51,7 +48,7 @@ function middlewares(config, stuff, app, auth, storage) {
         }
         if (!req.body.password) {
             res.status(501);
-            next({message: "Not implemented"});
+            return next({message: "Not implemented"});
         }
         
         htpasswd.authenticate(req.remote_user.name, req.body.password.old, (err, groups) => {
@@ -69,7 +66,6 @@ function middlewares(config, stuff, app, auth, storage) {
                     res.status(500);
                     return next({message: err.message || err});
                 }
-                console.log(`Read ${res.lenght} from ${htpasswd._config.file}`);
                 body = (body || '').toString('utf8');
                 var newbody = '';
                 var newpwd = crypt3(req.body.password.new);
@@ -85,9 +81,7 @@ function middlewares(config, stuff, app, auth, storage) {
                     }
                     newbody += "\n";
                 });
-                console.log(`about to write new file`);
                 fs.writeFile(htpasswd._config.file, newbody, (err) => {
-                    console.log(err);
                     locker.unlockFile(htpasswd._config.file, () => {
                         res.status(err ? 500 : 200);
                         return next(err ? 
