@@ -31,6 +31,7 @@
     "unix-crypt-td-js": "^1.0.0"
   },
   "devDependencies": {
+    "codecov": "^3.0.2",
     "jest": "^23.1.0",
     "jest-plugin-fs": "^2.9.0",
     "supertest": "^3.1.0"
