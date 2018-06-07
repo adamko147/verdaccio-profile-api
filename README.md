@@ -1,9 +1,9 @@
-# Verdaccio 2.x module for npm profile commands
+# Verdaccio 2.x/3.x module for npm profile commands
 
 [![Build Status](https://travis-ci.org/ahoracek/verdaccio-profile-api.svg?branch=master)](https://travis-ci.org/ahoracek/verdaccio-profile-api)
 [![codecov](https://codecov.io/gh/ahoracek/verdaccio-profile-api/branch/master/graph/badge.svg)](https://codecov.io/gh/ahoracek/verdaccio-profile-api)
 
-Basic Verdaccio 2.x module for handling npm profile commands and changing password with ```verdaccio-htpasswd``` authentication plugin
+Basic Verdaccio 2.x/3.x module for handling npm profile commands and changing password with ```verdaccio-htpasswd``` authentication plugin
 
 ## Install
 As simple as running:
