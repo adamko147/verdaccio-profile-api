@@ -4,7 +4,7 @@
   "description": "npm profile API implementaion for Verdaccio 2.x",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",

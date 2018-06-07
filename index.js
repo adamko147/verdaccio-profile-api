@@ -22,8 +22,15 @@ function middlewares(config, stuff, app, auth, storage) {
     }
 
     var router = express.Router();
-    router.use(auth.basic_middleware());
-    router.use(auth.bearer_middleware());
+    if (auth.basic_middleware) {
+        router.use(auth.basic_middleware());
+    }
+    if (auth.bearer_middleware) {
+        router.use(auth.bearer_middleware());
+    }
+    if (auth.apiJWTmiddleware) {
+        router.use(auth.apiJWTmiddleware());
+    }
     router.use(bodyParser.json());
 
     router.get('/', function(req, res, next) {
@@ -60,8 +67,8 @@ function middlewares(config, stuff, app, auth, storage) {
                 res.status(403);
                 return next({message: "You must be authenticated"});
             }
-            
-            locker.readFile(htpasswd._config.file, { lock: true }, (err, body) => {
+            var config_file = htpasswd._config ? htpasswd._config.file : htpasswd.config.file;
+            locker.readFile(config_file, { lock: true }, (err, body) => {
                 if (err) {
                     res.status(500);
                     return next({message: err.message || err});
@@ -81,8 +88,8 @@ function middlewares(config, stuff, app, auth, storage) {
                     }
                     newbody += "\n";
                 });
-                fs.writeFile(htpasswd._config.file, newbody, (err) => {
-                    locker.unlockFile(htpasswd._config.file, () => {
+                fs.writeFile(config_file, newbody, (err) => {
+                    locker.unlockFile(config_file, () => {
                         res.status(err ? 500 : 200);
                         return next(err ? 
                             {message: "Internal server error" } :
