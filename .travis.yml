@@ -8,8 +8,11 @@ cache:
     - node_modules # NPM packages
 
 install:
-  - npm i -g jest npm
+  - npm i -g jest npm codecov
   - npm i
 
 script:
   - jest --coverage
+
+after_success:
+  - codecov
