@@ -6,6 +6,7 @@ var fs = require('fs');
 var locker = require('@verdaccio/file-locking');
 var crypt = require('unix-crypt-td-js');
 var crypto = require('crypto');
+var md5 = require('apache-md5');
 
 function crypt3(password) {
     var salt = '$6$' + crypto.randomBytes(10).toString('base64');
@@ -13,6 +14,9 @@ function crypt3(password) {
 }
 
 function middlewares(config, stuff, app, auth, storage) {
+    if (stuff.logger) {
+        stuff.logger.warn('Profile api configuration ' + JSON.stringify(config));
+    }
     var htpasswd = undefined;
     for (var i = 0; i < auth.plugins.length; i++) {
         if (auth.plugins[i].constructor.name === 'HTPasswd') {
@@ -67,6 +71,13 @@ function middlewares(config, stuff, app, auth, storage) {
                 res.status(403);
                 return next({message: "You must be authenticated"});
             }
+            if (config.password_policy) {
+                var m = req.body.password.new.match(config.password_policy);
+                if (!m) {
+                    res.status(400);
+                    return next({message: "Password does not match password policy"});
+                }
+            }
             var config_file = htpasswd._config ? htpasswd._config.file : htpasswd.config.file;
             locker.readFile(config_file, { lock: true }, (err, body) => {
                 if (err) {
@@ -74,21 +85,28 @@ function middlewares(config, stuff, app, auth, storage) {
                     return next({message: err.message || err});
                 }
                 body = (body || '').toString('utf8');
-                var newbody = '';
-                var newpwd = crypt3(req.body.password.new);
-                
+                var newpwd = '';
+                var newbody = [];
+                if (config.password_hash == 'md5') {
+                    newpwd = md5(req.body.password.new);
+                }
+                else if (config.password_hash == 'sha1') {
+                    newpwd = '{SHA}' + crypto.createHash('sha1').update(req.body.password.new, 'binary').digest('base64');
+                }
+                else {
+                    newpwd = crypt3(req.body.password.new);
+                }
                 body.split('\n').forEach(line => {
                     if (line.startsWith(req.remote_user.name + ':')) {
-                        let args = line.split(':');
+                        let args = line.split(':', 2); // remove comments
                         args[1] = newpwd;
-                        newbody += args.join(':');
+                        newbody.push(args.join(':'))
                     }
-                    else {
-                        newbody += line;
+                    else if (line.length) {
+                        newbody.push(line);
                     }
-                    newbody += "\n";
                 });
-                fs.writeFile(config_file, newbody, (err) => {
+                fs.writeFile(config_file, newbody.join('\n')+'\n', (err) => {
                     locker.unlockFile(config_file, () => {
                         res.status(err ? 500 : 200);
                         return next(err ? 

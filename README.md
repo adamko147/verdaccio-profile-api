@@ -15,11 +15,20 @@ $ npm install -g verdaccio-profile-api
 ```
 
 ## Configure
-Plugin has no specific configuration, all you need is to enable the middlewares plugin in your configuration
+Plugin configuration:
 ```
 middlewares:
   profile-api:
+    password_hash: md5
+    password_policy: (?=.{9,})(?=.*?[^\w\s])(?=.*?[0-9])(?=.*?[A-Z]).*?[a-z].*
 ```
+#### password_hash
+- `md5`: use apache-md5 hash
+- `sha1`: use crypt sha-1 hash
+- leave empty to use `crypt` DES from `unix-crypt-td-js`
+
+#### password_policy
+Regular expression to check for password policy. `(?=.{9,})(?=.*?[^\w\s])(?=.*?[0-9])(?=.*?[A-Z]).*?[a-z].*` for lenght at least 9 characters, at least one upper, lower, number and special character
 
 ## Usage
 - First log in to npm private registry
@@ -59,7 +68,8 @@ middlewares:
   Again: 
   Set password
   ```
-  Now you can logout and login with your new credentials.
+  Now you can logout and login with your new credentials. 
+- If password policy is configured, server returns `E400` for passwords not matching password policy
 
 ## How does it work
 Plugin implements npm user API. Currently only ```npm profile get``` and ```npm profile set password``` is supported.
