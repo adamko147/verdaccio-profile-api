@@ -27,7 +27,7 @@ middlewares:
 - `sha1`: use crypt sha-1 hash
 - leave empty to use `crypt` DES from `unix-crypt-td-js`
 
-### password_policy
+#### password_policy
 Regular expression to check for password policy. `(?=.{9,})(?=.*?[^\w\s])(?=.*?[0-9])(?=.*?[A-Z]).*?[a-z].*` for lenght at least 9 characters, at least one upper, lower, number and special character
 
 ## Usage
