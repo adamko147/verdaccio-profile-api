@@ -26,6 +26,7 @@
   "homepage": "https://github.com/ahoracek/verdaccio-profile-api#readme",
   "dependencies": {
     "@verdaccio/file-locking": "0.0.7",
+    "apache-md5": "^1.1.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "unix-crypt-td-js": "^1.0.0"
