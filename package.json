@@ -28,13 +28,13 @@
     "@verdaccio/file-locking": "0.0.7",
     "apache-md5": "^1.1.2",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "unix-crypt-td-js": "^1.0.0"
   },
   "devDependencies": {
-    "codecov": "^3.0.2",
-    "jest": "^23.1.0",
+    "codecov": "^3.1.0",
+    "jest": "^23.6.0",
     "jest-plugin-fs": "^2.9.0",
-    "supertest": "^3.1.0"
+    "supertest": "^3.3.0"
   }
 }
