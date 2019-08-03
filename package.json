@@ -25,16 +25,16 @@
   },
   "homepage": "https://github.com/ahoracek/verdaccio-profile-api#readme",
   "dependencies": {
-    "@verdaccio/file-locking": "^1.0.0",
+    "@verdaccio/file-locking": "^1.0.4",
     "apache-md5": "^1.1.2",
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "unix-crypt-td-js": "^1.0.0"
   },
   "devDependencies": {
-    "codecov": "^3.1.0",
-    "jest": "^24.1.0",
+    "codecov": "^3.5.0",
+    "jest": "^24.8.0",
     "jest-plugin-fs": "^2.9.0",
-    "supertest": "^3.3.0"
+    "supertest": "^3.4.2"
   }
 }
