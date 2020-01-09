@@ -83,7 +83,7 @@ describe('verdaccio 3.x', () => {
       });
 
       test('authenticate returns error', done => {
-        mock_authenticate.mockImplementation((usr, pwd, cb) => { 
+        mock_authenticate.mockImplementation((usr, pwd, cb) => {
           cb(new Error('mocked error'));
         });
         request(app).
