@@ -1,6 +1,6 @@
 {
   "name": "verdaccio-profile-api",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "npm profile API implementaion for Verdaccio 2.x",
   "main": "index.js",
   "scripts": {
@@ -34,8 +34,9 @@
   "devDependencies": {
     "babel-runtime": "^6.26.0",
     "codecov": "^3.6.1",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "jest-plugin-fs": "^2.9.0",
-    "supertest": "^3.4.2"
+    "supertest": "^3.4.2",
+    "minimist": ">=1.2.2"
   }
 }
