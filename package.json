@@ -1,6 +1,6 @@
 {
   "name": "verdaccio-profile-api",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "npm profile API implementaion for Verdaccio 2.x",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahoracek/verdaccio-profile-api"
+    "url": "https://github.com/adamko147/verdaccio-profile-api"
   },
   "keywords": [
     "npm",
@@ -21,9 +21,9 @@
   "author": "Adam Horacek <adam.horacek@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ahoracek/verdaccio-profile-api/issues"
+    "url": "https://github.com/adamko147/verdaccio-profile-api/issues"
   },
-  "homepage": "https://github.com/ahoracek/verdaccio-profile-api#readme",
+  "homepage": "https://github.com/adamko147/verdaccio-profile-api#readme",
   "dependencies": {
     "@verdaccio/file-locking": "^1.0.4",
     "apache-md5": "^1.1.2",
